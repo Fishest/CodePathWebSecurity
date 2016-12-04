@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <head>
   <title>Tip Calculator</title>
+  
   <h2>Tip Calculator</h2>
-</head>
+  <style type="text/css">
+  body {
+    text-align: center;
+  }
+  </style>
 
+</head>
+  
   <form action="tipCalculator.php" method="GET">
-    Bill Subtotal:<input type="text" name="subtotal"/> <br>
+    Bill Subtotal:<input type="text" name="subtotal" value="<?php echo isset($_GET['subtotal']) ? $_GET['subtotal'] : '' ?>" /><br>
+    
     Tip Percentage:
     <?php
     for ($i = 10; $i <= 20; $i+=5){
       ?>
-      <input type="radio" name="percent" value=<?php echo $i . "%"; ?>> <?php echo $i . "%"; ?>
+      <input type="radio" name="percent" <?php echo ($_GET["percent"] == $i) ? "checked" : "unchecked" ?> value=<?php echo $i ; ?>> <?php echo $i . "%"; ?>
       <?php
     }
     ?>
     <br><br><input type="submit" value="Submit"/><br><br>
   </form>
+  
   <?php
     $subtotal = (float)$_GET["subtotal"];
     $percent = (float)$_GET["percent"];
@@ -28,14 +37,15 @@
         echo("Tip: $" . $tip1);
         echo "<br />\n";
         echo("Total: $" . $total1);
+
       } else {
         echo("Invalid input");
+        ?>
+        <?php
       }
     }
     else {
-      echo("Tip: $" );
-      echo "<br />\n";
-      echo("Total: $");
+      
     }
   ?>
   </html>
